@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Harlow Malloc">
+<meta name="author" content="Anant Sharma">
 <meta name="dcterms.date" content="2023-11-28">
 
-<title>MLBlogpost - Post With Code</title>
+<title>MLBlogpost - Detecting the Unseen: An In-Depth Exploration of Anomaly Detection in Machine Learning</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -108,7 +108,7 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Post With Code</h1>
+      <h1 class="title">Detecting the Unseen: An In-Depth Exploration of Anomaly Detection in Machine Learning</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">news</div>
                 <div class="quarto-category">code</div>
@@ -123,7 +123,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Author</div>
       <div class="quarto-title-meta-contents">
-               <p>Harlow Malloc </p>
+               <p>Anant Sharma </p>
             </div>
     </div>
       
@@ -148,9 +148,121 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p>This is a post with executable code.</p>
+<section id="introduction" class="level3">
+<h3 class="anchored" data-anchor-id="introduction">Introduction:</h3>
+<p>In the dynamic realm of machine learning, anomaly detection emerges as a crucial technique, enabling the identification of irregularities and outliers within datasets. From fraud detection in financial transactions to identifying defects in manufacturing, anomaly detection plays a pivotal role in maintaining the integrity and reliability of systems. In this blog, we’ll unravel the complexities of anomaly detection, exploring its principles, methods, and real-world applications.</p>
+</section>
+<section id="understanding-anomaly-detection" class="level3">
+<h3 class="anchored" data-anchor-id="understanding-anomaly-detection">Understanding Anomaly Detection:</h3>
+<p>Anomaly detection, also known as outlier detection, is a branch of machine learning focused on identifying instances that deviate significantly from the norm within a dataset. Unlike traditional classification, anomaly detection is often performed on unlabeled data, where the algorithm learns to recognize patterns of normal behavior and flag instances that exhibit unusual characteristics.</p>
+<section id="key-concepts" class="level4">
+<h4 class="anchored" data-anchor-id="key-concepts">Key Concepts:</h4>
+<ol type="1">
+<li><strong>Normal Behavior Modeling:</strong>
+<ul>
+<li>Anomaly detection models establish a baseline of normal behavior within the data. Instances deviating from this baseline are flagged as anomalies.</li>
+</ul></li>
+<li><strong>Supervised vs.&nbsp;Unsupervised:</strong>
+<ul>
+<li>While anomaly detection is typically unsupervised, where the algorithm learns from unlabeled data, some methods may incorporate a small amount of labeled data for training.</li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="anomaly-detection-techniques" class="level3">
+<h3 class="anchored" data-anchor-id="anomaly-detection-techniques">Anomaly Detection Techniques:</h3>
+<section id="statistical-methods" class="level4">
+<h4 class="anchored" data-anchor-id="statistical-methods">1. <strong>Statistical Methods:</strong></h4>
+<ul>
+<li>Statistical techniques, such as Z-score, use measures of central tendency and dispersion to identify data points that fall outside a predefined range.</li>
+</ul>
+</section>
+<section id="machine-learning-algorithms" class="level4">
+<h4 class="anchored" data-anchor-id="machine-learning-algorithms">2. <strong>Machine Learning Algorithms:</strong></h4>
+<ul>
+<li>Various machine learning algorithms, including Isolation Forests and One-Class SVM, are trained on normal data and can identify instances that deviate significantly from the learned patterns.</li>
+</ul>
+</section>
+<section id="clustering-based-approaches" class="level4">
+<h4 class="anchored" data-anchor-id="clustering-based-approaches">3. <strong>Clustering-Based Approaches:</strong></h4>
+<ul>
+<li>Clustering algorithms, when applied to normal data, can group similar instances. Anomalies are then identified as data points that do not belong to any cluster.</li>
+</ul>
+</section>
+<section id="deep-learning" class="level4">
+<h4 class="anchored" data-anchor-id="deep-learning">4. <strong>Deep Learning:</strong></h4>
+<ul>
+<li>Deep learning methods, particularly autoencoders, are powerful for capturing complex patterns in data. Anomalies are detected based on reconstruction errors.</li>
+</ul>
+</section>
+</section>
+<section id="real-world-applications" class="level3">
+<h3 class="anchored" data-anchor-id="real-world-applications">Real-World Applications:</h3>
+<section id="fraud-detection" class="level4">
+<h4 class="anchored" data-anchor-id="fraud-detection">1. <strong>Fraud Detection:</strong></h4>
+<ul>
+<li>Anomaly detection is extensively used in financial systems to identify unusual patterns or transactions that may indicate fraudulent activity.</li>
+</ul>
+</section>
+<section id="network-security" class="level4">
+<h4 class="anchored" data-anchor-id="network-security">2. <strong>Network Security:</strong></h4>
+<ul>
+<li>Identifying unusual patterns in network traffic can help detect cybersecurity threats and potential breaches.</li>
+</ul>
+</section>
+<section id="manufacturing-quality-control" class="level4">
+<h4 class="anchored" data-anchor-id="manufacturing-quality-control">3. <strong>Manufacturing Quality Control:</strong></h4>
+<ul>
+<li>Anomaly detection ensures the early identification of defects or irregularities in the manufacturing process, minimizing waste and ensuring product quality.</li>
+</ul>
+</section>
+<section id="healthcare-monitoring" class="level4">
+<h4 class="anchored" data-anchor-id="healthcare-monitoring">4. <strong>Healthcare Monitoring:</strong></h4>
+<ul>
+<li>In healthcare, anomaly detection aids in monitoring patient data for unusual patterns that may signal health issues.</li>
+</ul>
+</section>
+</section>
+<section id="evaluation-metrics" class="level3">
+<h3 class="anchored" data-anchor-id="evaluation-metrics">Evaluation Metrics:</h3>
+<ol type="1">
+<li><strong>True Positive (TP):</strong>
+<ul>
+<li>Instances correctly identified as anomalies.</li>
+</ul></li>
+<li><strong>False Positive (FP):</strong>
+<ul>
+<li>Normal instances incorrectly identified as anomalies.</li>
+</ul></li>
+<li><strong>True Negative (TN):</strong>
+<ul>
+<li>Normal instances correctly identified as normal.</li>
+</ul></li>
+<li><strong>False Negative (FN):</strong>
+<ul>
+<li>Anomalies incorrectly identified as normal instances.</li>
+</ul></li>
+</ol>
+</section>
+<section id="challenges-and-considerations" class="level3">
+<h3 class="anchored" data-anchor-id="challenges-and-considerations">Challenges and Considerations:</h3>
+<ol type="1">
+<li><strong>Labeling Anomalies:</strong>
+<ul>
+<li>The absence of labeled data for anomalies makes it challenging to evaluate and train models effectively.</li>
+</ul></li>
+<li><strong>Imbalanced Datasets:</strong>
+<ul>
+<li>Anomalies are often rare compared to normal instances, leading to imbalanced datasets. Specialized techniques are required to address this imbalance.</li>
+</ul></li>
+</ol>
+</section>
+<section id="conclusion" class="level3">
+<h3 class="anchored" data-anchor-id="conclusion">Conclusion:</h3>
+<p>As we delve into the intricacies of anomaly detection in machine learning, the significance of identifying irregularities within data becomes clear. From safeguarding financial systems against fraud to ensuring the quality of manufactured products, anomaly detection stands as a silent guardian, preserving the integrity and reliability of systems in our increasingly interconnected world. As technology continues to advance, the role of anomaly detection in maintaining the security and efficiency of diverse applications is set to become even more pronounced.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
