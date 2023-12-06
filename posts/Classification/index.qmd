@@ -1,6 +1,6 @@
 ---
 title: "Decoding the Art of Prediction: A Comprehensive Guide to Machine Learning Classification"
-author: "Harlow Malloc"
+author: "Anant Sharma"
 date: "2023-11-28"
 categories: [news, code, analysis]
 image: "image.jpg"

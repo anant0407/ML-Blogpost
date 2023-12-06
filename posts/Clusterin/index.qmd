@@ -1,6 +1,6 @@
 ---
 title: "Unveiling the Power of Patterns: A Deep Dive into Machine Learning Clustering"
-author: "Harlow Malloc"
+author: "Anant Sharma"
 date: "2023-11-28"
 categories: [news, code, analysis]
 image: "image.jpg"

@@ -1,6 +1,6 @@
 ---
 title: "Unraveling the Threads: Probability Theory and Random Variables in Machine Learning"
-author: "Harlow Malloc"
+author: "Anant Sharma"
 date: "2023-11-28"
 categories: [news, code, analysis]
 image: "image.jpg"
