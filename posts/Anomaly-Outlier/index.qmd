@@ -1,9 +1,10 @@
 ---
 title: "Detecting the Unseen: An In-Depth Exploration of Anomaly Detection in Machine Learning"
+title-block-banner-color: white
 author: "Anant Sharma"
 date: "2023-11-28"
 categories: [news, code, analysis]
-image: "image.jpg"
+image: "outlier2.jpeg"
 ---
 
 

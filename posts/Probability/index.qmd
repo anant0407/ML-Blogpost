@@ -1,9 +1,10 @@
 ---
 title: "Unraveling the Threads: Probability Theory and Random Variables in Machine Learning"
+title-block-banner-color: white
 author: "Anant Sharma"
 date: "2023-11-28"
 categories: [news, code, analysis]
-image: "image.jpg"
+image: "pt.jpeg"
 ---
 
 

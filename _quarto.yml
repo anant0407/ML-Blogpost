@@ -3,17 +3,17 @@ project:
   output-dir: docs
 
 website:
-  title: "MLBlogpost"
+  title: "MLL"
   navbar:
     right:
       - about.qmd
       - icon: github
-        href: https://github.com/
+        href: https://github.com/anant0407/ML-Blogpost
       - icon: twitter
         href: https://twitter.com
 format:
   html:
-    theme: cosmo
+    theme: lux
     css: styles.css
 
 

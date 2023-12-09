@@ -1,9 +1,10 @@
 ---
 title: "Decoding the Art of Prediction: A Comprehensive Guide to Machine Learning Classification"
+title-block-banner-color: white
 author: "Anant Sharma"
 date: "2023-11-28"
 categories: [news, code, analysis]
-image: "image.jpg"
+image: "classification.svg"
 ---
 
 

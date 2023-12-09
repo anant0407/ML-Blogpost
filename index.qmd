@@ -1,5 +1,6 @@
 ---
-title: "ML Blogpost"
+title: "The Machine Learning Lounge: Learn. Adapt. Improve."
+title-block-banner-color: white
 listing:
   contents: posts
   sort: "date desc"
