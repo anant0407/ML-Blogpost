@@ -1,10 +1,11 @@
 ---
-title: "Detecting the Unseen: An In-Depth Exploration of Anomaly Detection in Machine Learning"
+title: "A Beginner's Guide for Anomaly Detection"
 title-block-banner-color: white
 author: "Anant Sharma"
 date: "2023-11-28"
 categories: [news, code, analysis]
 image: "outlier2.jpeg"
+jupyter: python3
 ---
 
 
@@ -23,6 +24,42 @@ Anomaly detection, also known as outlier detection, is a branch of machine learn
 
 2. **Supervised vs. Unsupervised:**
    - While anomaly detection is typically unsupervised, where the algorithm learns from unlabeled data, some methods may incorporate a small amount of labeled data for training.
+
+
+```{python}
+# Import necessary libraries
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import zscore
+from sklearn.datasets import make_blobs
+
+
+# Generate synthetic data
+data, _ = make_blobs(n_samples=300, centers=4, random_state=42)
+
+# Introduce an anomaly (outlier)
+anomaly = np.array([[0, 0]])
+
+# Combine the original data with the anomaly
+data_with_anomaly = np.vstack([data, anomaly])
+
+# Calculate Z-scores for each feature
+z_scores = zscore(data_with_anomaly, axis=0)
+
+# Set a threshold for anomaly detection (e.g., 2 standard deviations)
+threshold = 2
+
+# Identify anomalies based on Z-scores
+anomalies = np.where(np.abs(z_scores) > threshold)
+
+# Visualize the data with anomaly
+plt.scatter(data_with_anomaly[:, 0], data_with_anomaly[:, 1], s=30, cmap='viridis')
+plt.scatter(data_with_anomaly[anomalies[0], 0], data_with_anomaly[anomalies[0], 1], color='red', s=100, label='Anomalies')
+plt.title('Data with Anomaly for Z-score Anomaly Detection')
+plt.legend()
+plt.show()
+```
+
 
 ### Anomaly Detection Techniques:
 

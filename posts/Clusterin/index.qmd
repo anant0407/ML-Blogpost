@@ -1,5 +1,5 @@
 ---
-title: "Unveiling the Power of Patterns: A Beginner's Guide into Clustering"
+title: "A Beginner's Guide into Clustering"
 title-block-banner-color: white
 author: "Anant Sharma"
 date: "2023-11-28"

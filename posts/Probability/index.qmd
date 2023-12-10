@@ -5,6 +5,7 @@ author: "Anant Sharma"
 date: "2023-11-28"
 categories: [news, code, analysis]
 image: "pt.jpeg"
+jupyter: python3
 ---
 
 
