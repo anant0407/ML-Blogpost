@@ -9,8 +9,10 @@ website:
       - about.qmd
       - icon: github
         href: https://github.com/anant0407/ML-Blogpost
-      - icon: twitter
-        href: https://twitter.com
+
+
+
+
 format:
   html:
     theme: lux
