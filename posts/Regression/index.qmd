@@ -1,8 +1,8 @@
 ---
-title: "Navigating the Regression Landscape: Linear and Nonlinear Regression in Machine Learning"
+title: "A Beginner's Guide to Linear and Nonlinear Regression"
 title-block-banner-color: white
 author: "Anant Sharma"
-date: "2023-11-28"
+date: "2023-11-29"
 categories: [news, code, analysis]
 image: "regression.jpeg"
 ---
@@ -16,36 +16,123 @@ Regression analysis is a cornerstone of machine learning, providing the tools to
 
 At its core, regression is a statistical method that examines the relationship between a dependent variable (output) and one or more independent variables (inputs). The goal is to create a model that captures and quantifies these relationships, enabling predictions and insights.
 
-#### Key Concepts:
-
-1. **Linear Regression:**
-   - Linear regression assumes a linear relationship between the independent variables and the dependent variable. The model represents this relationship with a straight line equation (y = mx + b), where "m" is the slope, and "b" is the intercept.
-
+#### Types of Regression:
+   
 2. **Nonlinear Regression:**
-   - Nonlinear regression, on the other hand, acknowledges that the relationship between variables may not be a straight line. It allows for more complex, curved, or non-linear relationships to be captured in the model.
+  
 
 ### Linear Regression:
+   - Linear regression assumes a linear relationship between the independent variables and the dependent variable. The model represents this relationship with a straight line equation (y = mx + b), where "m" is the slope, and "b" is the intercept.
 
-#### 1. Simple Linear Regression:
-   - In the case of one independent variable, simple linear regression fits a line to the data points. The model aims to minimize the sum of squared differences between the predicted and actual values.
+   To practice, we'll generate a synthetic dataset so that its easier for you to follow along.
+```{python}
+# Import necessary libraries
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score
 
-#### 2. Multiple Linear Regression:
-   - Extending to multiple independent variables, multiple linear regression accommodates more complex relationships. The model equation becomes a weighted sum of the input variables.
+# Generate synthetic data for linear regression
+np.random.seed(42)
+X = 2 * np.random.rand(100, 1)
+y = 4 + 3 * X + np.random.randn(100, 1)
+```
 
+   Now, as usual, we'll split the data into 2 sets, for training and testing.
+
+```{python}
+# Split the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Train a linear regression model
+lin_reg = LinearRegression()
+lin_reg.fit(X_train, y_train)
+```
+
+   Now, we make the predictions and evaluate the model
+
+```{python}
+# Make predictions on the test set
+y_pred = lin_reg.predict(X_test)
+
+# Evaluate the model
+mse = mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+
+# Visualize the regression line and test set
+plt.scatter(X_test, y_test, color='black', label='Actual Data')
+plt.plot(X_test, y_pred, color='blue', linewidth=3, label='Linear Regression Line')
+plt.title('Linear Regression Example')
+plt.xlabel('X')
+plt.ylabel('y')
+plt.legend()
+plt.show()
+
+# Display evaluation metrics
+print(f'Mean Squared Error: {mse:.2f}')
+print(f'R-squared: {r2:.2f}')
+
+```
+
+   The goal of linear regression is to find the best-fit line that minimizes the difference between the predicted and actual values, often measured using the least squares method.
 #### Applications:
    - **Predictive Modeling:** Linear regression is widely used for predicting numerical outcomes, such as sales forecasting or stock price predictions.
    - **Trend Analysis:** It helps identify trends and understand the strength and direction of relationships between variables.
 
 ### Nonlinear Regression:
 
-#### 1. Polynomial Regression:
-   - This form of nonlinear regression fits a polynomial equation to the data. While it may introduce curvature, it remains a relatively simple way to capture nonlinearity.
+ - Nonlinear regression, on the other hand, acknowledges that the relationship between variables may not be a straight line. It allows for more complex, curved, or non-linear relationships to be captured in the model.
 
-#### 2. Exponential and Logarithmic Regression:
-   - Nonlinear models can take the form of exponential or logarithmic functions, allowing for a wide range of shapes to be fitted to the data.
+We'll follow similar procedure as linear regression here but with a few minor changes
+```{python}
+# Import necessary libraries
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.pipeline import make_pipeline
+from sklearn.metrics import mean_squared_error, r2_score
 
-#### 3. Sigmoidal (Logistic) Regression:
-   - Commonly used in classification problems, sigmoidal regression models the probability of an event occurring. It produces an S-shaped curve, often resembling the logistic function.
+# Generate synthetic data for non-linear regression
+np.random.seed(42)
+X = 2 * np.random.rand(100, 1)
+y = 4 + 3 * X + 1.5 * X**2 + np.random.randn(100, 1)
+
+# Split the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Polynomial regression with a quadratic term
+degree = 2
+poly_reg = make_pipeline(PolynomialFeatures(degree), LinearRegression())
+poly_reg.fit(X_train, y_train)
+
+# Make predictions on the test set
+y_pred = poly_reg.predict(X_test)
+
+# Evaluate the model
+mse = mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+
+# Visualize the regression curve and test set
+X_range = np.linspace(0, 2, 100).reshape(-1, 1)
+y_range_pred = poly_reg.predict(X_range)
+
+plt.scatter(X_test, y_test, color='black', label='Actual Data')
+plt.plot(X_range, y_range_pred, color='blue', linewidth=3, label='Quadratic Regression Curve')
+plt.title('Non-Linear Regression Example (Quadratic)')
+plt.xlabel('X')
+plt.ylabel('y')
+plt.legend()
+plt.show()
+
+# Display evaluation metrics
+print(f'Mean Squared Error: {mse:.2f}')
+print(f'R-squared: {r2:.2f}')
+```
+
+   Non-linear regression is a powerful tool for capturing complex relationships in data. By incorporating polynomial terms, non-linear regression models can adapt to more intricate patterns. It's essential to strike a balance to avoid overfitting, and techniques such as regularization can be employed. Experimenting with different degrees of polynomials allows for flexibility in modeling non-linear relationships in various datasets.
 
 #### Applications:
    - **Biology and Medicine:** Nonlinear regression is employed to model growth curves, drug response curves, and other biological phenomena.

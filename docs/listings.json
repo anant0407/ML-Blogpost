@@ -3,10 +3,10 @@
     "listing": "/index.html",
     "items": [
       "/posts/Classification/index.html",
-      "/posts/Probability/index.html",
-      "/posts/Anomaly-Outlier/index.html",
       "/posts/Clusterin/index.html",
+      "/posts/Anomaly-Outlier/index.html",
       "/posts/Regression/index.html",
+      "/posts/Probability/index.html",
       "/posts/welcome/index.html"
     ]
   }

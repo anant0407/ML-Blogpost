@@ -2,7 +2,7 @@
 title: "A Beginner's Guide to Classification"
 title-block-banner-color: white
 author: "Anant Sharma"
-date: "2023-11-28"
+date: "2023-12-04"
 categories: [news, code, analysis]
 image: "classification.svg"
 ---
@@ -54,45 +54,55 @@ plt.show()
    - Despite its name, logistic regression is a classification algorithm used for binary outcomes. It models the probability that a given input belongs to a particular class. Logistic Regression uses the sigmoid function to transform raw predictions into probabilities. The sigmoid function squashes values between 0 and 1.
 
    The dataset is split into training and testing sets using train_test_split to train the model on one subset and evaluate its performance on another.
-   ```{python}
-   # Split the dataset into training and testing sets
-   X_train, X_test, y_train, y_test = train_test_split(data, labels, test_size=0.2, random_state=42)
-   ```
+
+```{python}
+#| echo : true
+# Split the dataset into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(data, labels, test_size=0.2, random_state=42)
+
+```
+
 
    We apply Logistic Regression using the LogisticRegression class from scikit-learn. The model is trained on the training set.
-   ```{python}
-   # Apply Logistic Regression
-   logreg = LogisticRegression(solver='liblinear')
-   logreg.fit(X_train, y_train)
-   ```
+
+```{python}
+# Apply Logistic Regression
+logreg = LogisticRegression(solver='liblinear')
+logreg.fit(X_train, y_train)
+```
+
+
 
    The accuracy of the model is evaluated on the test set, providing insights into its performance on unseen data.
-   ```{python}
-   # Evaluate the model on the test set
-   accuracy = logreg.score(X_test, y_test)
-   print(f"Accuracy on the test set: {accuracy:.2%}")
+
+```{python}
+# Evaluate the model on the test set
+accuracy = logreg.score(X_test, y_test)
+print(f"Accuracy on the test set: {accuracy:.2%}")
    ```
 
-   ```{python}
-   # Plot the decision boundary
-   plt.scatter(X_test[:, 0], X_test[:, 1], c=y_test, s=30, cmap='tab10', marker='o', label='Actual')
-   plt.scatter(X_test[:, 0], X_test[:, 1], c=logreg.predict(X_test), s=10, cmap='viridis', marker='x', label='Predicted')
-   plt.title('Logistic Regression Classification Results')
-   plt.xlabel('Feature 1')
-   plt.ylabel('Feature 2')
 
-   # Plot decision boundary
-   h = .02  # Step size in the mesh
-   x_min, x_max = data[:, 0].min() - 1, data[:, 0].max() + 1
-   y_min, y_max = data[:, 1].min() - 1, data[:, 1].max() + 1
-   xx, yy = np.meshgrid(np.arange(x_min, x_max, h), np.arange(y_min, y_max, h))
-   Z = logreg.predict(np.c_[xx.ravel(), yy.ravel()])
-   Z = Z.reshape(xx.shape)
-   plt.contour(xx, yy, Z, colors='red', linewidths=1)
 
-   plt.legend()
-   plt.show()
-   ```
+```{python}
+# Plot the decision boundary
+plt.scatter(X_test[:, 0], X_test[:, 1], c=y_test, s=30, cmap='tab10', marker='o', label='Actual')
+plt.scatter(X_test[:, 0], X_test[:, 1], c=logreg.predict(X_test), s=10, cmap='viridis', marker='x', label='Predicted')
+plt.title('Logistic Regression Classification Results')
+plt.xlabel('Feature 1')
+plt.ylabel('Feature 2')
+
+# Plot decision boundary
+h = .02  # Step size in the mesh
+x_min, x_max = data[:, 0].min() - 1, data[:, 0].max() + 1
+y_min, y_max = data[:, 1].min() - 1, data[:, 1].max() + 1
+xx, yy = np.meshgrid(np.arange(x_min, x_max, h), np.arange(y_min, y_max, h))
+Z = logreg.predict(np.c_[xx.ravel(), yy.ravel()])
+Z = Z.reshape(xx.shape)
+plt.contour(xx, yy, Z, colors='red', linewidths=1)
+
+plt.legend()
+plt.show()
+```
 
    Logistic Regression is a versatile algorithm for binary classification tasks, and the sigmoid function enables it to output probabilities that can be thresholded to make predictions. Understanding how to apply Logistic Regression to real-world datasets, evaluate its performance, and interpret results is crucial for leveraging it effectively in classification scenarios.
 
@@ -101,23 +111,23 @@ plt.show()
 #### 2. **Decision Trees:**
    - Decision Trees are powerful and interpretable machine learning models widely used for classification and regression tasks. Decision trees recursively split the data based on features, creating a tree-like structure of decisions that lead to the final classification. Let's delve into the principles behind Decision Trees, their construction, and how they make decisions based on input features.
 
-   ```{python}
-   X_train, X_test, y_train, y_test = train_test_split(data, labels, test_size=0.2, random_state=42)
+```{python}
+X_train, X_test, y_train, y_test = train_test_split(data, labels, test_size=0.2, random_state=42)
 
-   # Apply Decision Tree
-   decision_tree = DecisionTreeClassifier()
-   decision_tree.fit(X_train, y_train)
+# Apply Decision Tree
+decision_tree = DecisionTreeClassifier()
+decision_tree.fit(X_train, y_train)
 
-   # Evaluate the model on the test set
-   accuracy = decision_tree.score(X_test, y_test)
-   print(f"Accuracy on the test set: {accuracy:.2%}")
+# Evaluate the model on the test set
+accuracy = decision_tree.score(X_test, y_test)
+print(f"Accuracy on the test set: {accuracy:.2%}")
 
-   # Plot the Decision Tree
-   plt.figure(figsize=(10, 6))
-   plot_tree(decision_tree, filled=False)
-   plt.title('Decision Tree for Classification')
-   plt.show()
-   ```
+# Plot the Decision Tree
+plt.figure(figsize=(10, 6))
+plot_tree(decision_tree, filled=False)
+plt.title('Decision Tree for Classification')
+plt.show()
+```
 
    Decision Trees provide a transparent and intuitive way to make predictions. They are particularly valuable for understanding the decision-making process in a machine learning model. Experimenting with different parameters and visualizing the tree structure enhances your grasp of Decision Trees and their applications in various domains.
 
@@ -125,79 +135,79 @@ plt.show()
 #### 3. **Random Forest:**
    - Random Forest is a powerful ensemble learning technique that leverages the strength of multiple decision trees to improve classification performance. A collection of decision trees, random forests aggregate the predictions of individual trees to improve accuracy and robustness. Let's explore Random Forest
 
-   ```{python}
-   # Split the data into training and testing sets
-   X_train, X_test, y_train, y_test = train_test_split(data, labels, test_size=0.2, random_state=42)
+```{python}
+# Split the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(data, labels, test_size=0.2, random_state=42)
 
-   # Apply Random Forest Classifier
-   rf_classifier = RandomForestClassifier(n_estimators=100, random_state=42)
-   rf_classifier.fit(X_train, y_train)
+# Apply Random Forest Classifier
+rf_classifier = RandomForestClassifier(n_estimators=100, random_state=42)
+rf_classifier.fit(X_train, y_train)
 
-   # Predictions on the test set
-   y_pred = rf_classifier.predict(X_test)
+# Predictions on the test set
+y_pred = rf_classifier.predict(X_test)
 
-   # Calculate accuracy and display confusion matrix
-   accuracy = accuracy_score(y_test, y_pred)
-   conf_matrix = confusion_matrix(y_test, y_pred)
+# Calculate accuracy and display confusion matrix
+accuracy = accuracy_score(y_test, y_pred)
+conf_matrix = confusion_matrix(y_test, y_pred)
 
-   print(f"Accuracy: {accuracy * 100:.2f}%")
-   print("Confusion Matrix:")
-   print(conf_matrix)
-   ```
+print(f"Accuracy: {accuracy * 100:.2f}%")
+print("Confusion Matrix:")
+print(conf_matrix)
+```
 
    Random Forest is a versatile and powerful algorithm for classification tasks, offering improved accuracy and robustness compared to individual decision trees. Experimenting with the number of trees (n_estimators) and other hyperparameters allows you to optimize the model for your specific dataset, making Random Forest a valuable tool for a wide range of classification problems.
 
 #### 4. **Support Vector Machines (SVM):**
    - Support Vector Machines (SVM) are powerful and versatile machine learning models used for classification and regression tasks. SVM finds a hyperplane that best separates data into different classes, maximizing the margin between classes. Let's explore the fundamental concepts behind SVM and provide a practical example of using SVM for binary classification.
 
-   ```{python}
-   # Apply Support Vector Machine (SVM) Classifier
-   svm_classifier = SVC(kernel='linear', random_state=42)
-   svm_classifier.fit(X_train, y_train)
+```{python}
+# Apply Support Vector Machine (SVM) Classifier
+svm_classifier = SVC(kernel='linear', random_state=42)
+svm_classifier.fit(X_train, y_train)
 
-   # Predictions on the test set
-   y_pred = svm_classifier.predict(X_test)
+# Predictions on the test set
+y_pred = svm_classifier.predict(X_test)
 
-   # Calculate accuracy and display confusion matrix
-   accuracy = accuracy_score(y_test, y_pred)
-   conf_matrix = confusion_matrix(y_test, y_pred)
+# Calculate accuracy and display confusion matrix
+accuracy = accuracy_score(y_test, y_pred)
+conf_matrix = confusion_matrix(y_test, y_pred)
 
-   print(f"Accuracy: {accuracy * 100:.2f}%")
-   ```
-   Support Vector Machines are effective for linear and non-linear classification tasks. The choice of the kernel function and other hyperparameters can significantly impact SVM's performance. Experimenting with different kernel functions and tuning parameters enhances your ability to leverage SVM for diverse classification problems.
+print(f"Accuracy: {accuracy * 100:.2f}%")
+```
+Support Vector Machines are effective for linear and non-linear classification tasks. The choice of the kernel function and other hyperparameters can significantly impact SVM's performance. Experimenting with different kernel functions and tuning parameters enhances your ability to leverage SVM for diverse classification problems.
 
 #### 5. **K-Nearest Neighbors (KNN):**
    - K-Nearest Neighbors (KNN) is a simple yet powerful algorithm used for both classification and regression tasks. KNN classifies data points based on the majority class among their k nearest neighbors in the feature space. Let's explore the key concepts behind KNN and demonstrate its application for binary classification.
 
-   ```{python}
-   # Split the data into training and testing sets
-   X_train, X_test, y_train, y_test = train_test_split(data, labels, test_size=0.2, random_state=42)
+```{python}
+# Split the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(data, labels, test_size=0.2, random_state=42)
 
-   # Apply K-Nearest Neighbors (KNN) Classifier
-   knn_classifier = KNeighborsClassifier(n_neighbors=5)  # Set K to 5 (adjust based on dataset characteristics)
-   knn_classifier.fit(X_train, y_train)
+# Apply K-Nearest Neighbors (KNN) Classifier
+knn_classifier = KNeighborsClassifier(n_neighbors=5)  # Set K to 5 (adjust based on dataset characteristics)
+knn_classifier.fit(X_train, y_train)
 
-   # Create a meshgrid to plot the decision boundaries
-   h = .02  # Step size in the mesh
-   x_min, x_max = data[:, 0].min() - 1, data[:, 0].max() + 1
-   y_min, y_max = data[:, 1].min() - 1, data[:, 1].max() + 1
-   xx, yy = np.meshgrid(np.arange(x_min, x_max, h), np.arange(y_min, y_max, h))
+# Create a meshgrid to plot the decision boundaries
+h = .02  # Step size in the mesh
+x_min, x_max = data[:, 0].min() - 1, data[:, 0].max() + 1
+y_min, y_max = data[:, 1].min() - 1, data[:, 1].max() + 1
+xx, yy = np.meshgrid(np.arange(x_min, x_max, h), np.arange(y_min, y_max, h))
 
-   # Predict the class for each point in the meshgrid
-   Z = knn_classifier.predict(np.c_[xx.ravel(), yy.ravel()])
-   Z = Z.reshape(xx.shape)
+# Predict the class for each point in the meshgrid
+Z = knn_classifier.predict(np.c_[xx.ravel(), yy.ravel()])
+Z = Z.reshape(xx.shape)
 
-   # Plot the decision boundaries
-   plt.contourf(xx, yy, Z, cmap='viridis', alpha=0.8)
+# Plot the decision boundaries
+plt.contourf(xx, yy, Z, cmap='viridis', alpha=0.8)
 
-   # Scatter plot of the data points
-   plt.scatter(X_test[:, 0], X_test[:, 1], c=y_test, cmap='viridis', s=30, edgecolors='k')
-   plt.title('KNN Classification with Decision Boundaries')
-   plt.xlabel('Feature 1')
-   plt.ylabel('Feature 2')
-   plt.show()
+# Scatter plot of the data points
+plt.scatter(X_test[:, 0], X_test[:, 1], c=y_test, cmap='viridis', s=30, edgecolors='k')
+plt.title('KNN Classification with Decision Boundaries')
+plt.xlabel('Feature 1')
+plt.ylabel('Feature 2')
+plt.show()
 
-   ```
+```
 
    K-Nearest Neighbors is an intuitive algorithm that relies on the proximity of data points for classification. The choice of K and the distance metric significantly impact the model's effectiveness. Experimenting with different K values and understanding how it affects the balance between bias and variance is crucial for successfully applying KNN to various classification problems.
 

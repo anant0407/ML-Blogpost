@@ -2,7 +2,7 @@
 title: "A Beginner's Guide for Anomaly Detection"
 title-block-banner-color: white
 author: "Anant Sharma"
-date: "2023-11-28"
+date: "2023-11-30"
 categories: [news, code, analysis]
 image: "outlier2.jpeg"
 jupyter: python3
@@ -26,54 +26,129 @@ Anomaly detection, also known as outlier detection, is a branch of machine learn
    - While anomaly detection is typically unsupervised, where the algorithm learns from unlabeled data, some methods may incorporate a small amount of labeled data for training.
 
 
-```{python}
-# Import necessary libraries
-import numpy as np
-import matplotlib.pyplot as plt
-from scipy.stats import zscore
-from sklearn.datasets import make_blobs
-
-
-# Generate synthetic data
-data, _ = make_blobs(n_samples=300, centers=4, random_state=42)
-
-# Introduce an anomaly (outlier)
-anomaly = np.array([[0, 0]])
-
-# Combine the original data with the anomaly
-data_with_anomaly = np.vstack([data, anomaly])
-
-# Calculate Z-scores for each feature
-z_scores = zscore(data_with_anomaly, axis=0)
-
-# Set a threshold for anomaly detection (e.g., 2 standard deviations)
-threshold = 2
-
-# Identify anomalies based on Z-scores
-anomalies = np.where(np.abs(z_scores) > threshold)
-
-# Visualize the data with anomaly
-plt.scatter(data_with_anomaly[:, 0], data_with_anomaly[:, 1], s=30, cmap='viridis')
-plt.scatter(data_with_anomaly[anomalies[0], 0], data_with_anomaly[anomalies[0], 1], color='red', s=100, label='Anomalies')
-plt.title('Data with Anomaly for Z-score Anomaly Detection')
-plt.legend()
-plt.show()
-```
-
-
 ### Anomaly Detection Techniques:
 
 #### 1. **Statistical Methods:**
    - Statistical techniques, such as Z-score, use measures of central tendency and dispersion to identify data points that fall outside a predefined range.
 
+   Let's use Z-score for an example:
+   
+   Z-Score, also known as standard score, is a statistical metric used for quantifying how far a data point is from the mean of a dataset in terms of standard deviations. In anomaly detection, Z-Score provides a measure of how unusual or unexpected a particular observation is within a given distribution.
+```{python}
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import zscore
+
+# Generate synthetic data with anomalies
+data = np.concatenate([np.random.normal(0, 1, 900), np.random.normal(10, 1, 100)])
+
+# Calculate Z-Scores for the data
+z_scores = zscore(data)
+
+# Set a threshold for anomaly detection (e.g., 3 standard deviations)
+threshold = 2
+
+# Identify anomalies based on the threshold
+anomalies = np.where(np.abs(z_scores) > threshold)[0]
+
+# Visualize the data and anomalies
+plt.scatter(range(len(data)), data, c='blue', label='Normal Data')
+plt.scatter(anomalies, data[anomalies], c='red', label='Anomalies')
+plt.axhline(threshold, color='green', linestyle='--', label=f'Threshold ({threshold} Z-Score)')
+plt.axhline(-threshold, color='green', linestyle='--')
+plt.title('Z-Score Anomaly Detection')
+plt.xlabel('Data Point Index')
+plt.ylabel('Value')
+plt.legend()
+plt.show()
+```
+
+
 #### 2. **Machine Learning Algorithms:**
    - Various machine learning algorithms, including Isolation Forests and One-Class SVM, are trained on normal data and can identify instances that deviate significantly from the learned patterns.
 
-#### 3. **Clustering-Based Approaches:**
-   - Clustering algorithms, when applied to normal data, can group similar instances. Anomalies are then identified as data points that do not belong to any cluster.
+   Let's use One-Class SVM for an example:
 
-#### 4. **Deep Learning:**
-   - Deep learning methods, particularly autoencoders, are powerful for capturing complex patterns in data. Anomalies are detected based on reconstruction errors.
+   One-Class SVM (Support Vector Machine) is a powerful algorithm for anomaly detection that builds a model representing normal behavior and identifies deviations from this norm as anomalies. 
+
+```{python}
+# Import necessary libraries
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.svm import OneClassSVM
+
+# Generate synthetic data with anomalies
+data = np.concatenate([np.random.normal(0, 1, 900), np.random.normal(10, 1, 100)])
+
+# Reshape the data for compatibility with OneClassSVM
+data = data.reshape(-1, 1)
+
+# Fit One-Class SVM model
+svm_model = OneClassSVM(nu=0.05)  # Adjust nu based on the dataset characteristics
+svm_model.fit(data)
+
+# Predict inliers and outliers
+predictions = svm_model.predict(data)
+
+# Identify anomalies (predictions == -1)
+anomalies = np.where(predictions == -1)[0]
+
+# Visualize the data and anomalies
+plt.scatter(range(len(data)), data, c='blue', label='Normal Data')
+plt.scatter(anomalies, data[anomalies], c='red', label='Anomalies')
+plt.title('One-Class SVM Anomaly Detection')
+plt.xlabel('Data Point Index')
+plt.ylabel('Value')
+plt.legend()
+plt.show()
+
+```
+
+#### 3. **Clustering-Based Approaches:**
+   - Clustering algorithms, when applied to normal data, can group similar instances. Anomalies are then identified as data points that do not belong to any cluster. 
+
+   Let's use One-Class SVM for an example:
+   
+   K-Means, a popular clustering algorithm, can be repurposed for anomaly detection by leveraging the concept of cluster centroids. Anomalies are identified by comparing the distances to a chosen threshold (e.g., 95th percentile).
+```{python}
+# Import necessary libraries
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
+from scipy.spatial.distance import cdist
+
+# Generate synthetic data with anomalies
+data = np.concatenate([np.random.normal(0, 1, 900), np.random.normal(10, 1, 100)])
+
+# Reshape the data for compatibility with KMeans
+data = data.reshape(-1, 1)
+
+# Fit KMeans model
+kmeans_model = KMeans(n_clusters=2, random_state=42)  # Adjust the number of clusters based on the dataset
+kmeans_model.fit(data)
+
+# Predict cluster assignments and calculate distances to centroids
+cluster_assignments = kmeans_model.predict(data)
+distances = np.min(cdist(data, kmeans_model.cluster_centers_, 'euclidean'), axis=1)
+
+# Set a threshold for anomaly detection
+threshold = np.percentile(distances, 95)  # Adjust the percentile based on desired sensitivity
+
+# Identify anomalies
+anomalies = np.where(distances > threshold)[0]
+
+# Visualize the data, clusters, and anomalies
+plt.scatter(range(len(data)), data, c=cluster_assignments, cmap='viridis', label='Clusters', alpha=0.5)
+plt.scatter(anomalies, data[anomalies], c='red', label='Anomalies')
+plt.scatter(kmeans_model.cluster_centers_[:, 0], kmeans_model.cluster_centers_, c='black', marker='X', s=100, label='Centroids')
+plt.title('K-Means Anomaly Detection')
+plt.xlabel('Data Point Index')
+plt.ylabel('Value')
+plt.legend()
+plt.show()
+
+```
+
 
 ### Real-World Applications:
 

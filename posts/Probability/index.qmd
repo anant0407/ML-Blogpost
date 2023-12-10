@@ -1,5 +1,5 @@
 ---
-title: "Unraveling the Threads: Probability Theory and Random Variables in Machine Learning"
+title: "A Beginner's Guide to Probability Theory and Random Variables in Machine Learning"
 title-block-banner-color: white
 author: "Anant Sharma"
 date: "2023-11-28"
@@ -35,10 +35,77 @@ A random variable is a mathematical function that assigns a real number to each 
 #### Types of Random Variables:
 
 1. **Discrete Random Variables:**
-   - These take on a countable number of distinct values. Examples include the outcome of rolling a die or the number of emails received in a day.
+   - Discrete random variables, in particular, play a crucial role in probabilistic models. These take on a countable number of distinct values. Examples include the outcome of rolling a die or the number of emails received in a day.
+   
+   First lets import the libraries, generate synthetic data for a discrete random variable and visualize the graph.
+```{python}
+# Import necessary libraries
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import randint
+from collections import Counter
+
+# Generate synthetic data for a discrete random variable
+data = randint.rvs(1, 7, size=1000, random_state=42)
+
+# Visualize the distribution of the discrete random variable
+plt.hist(data, bins=np.arange(0.5, 7.5, 1), align='mid', edgecolor='black', alpha=0.7)
+plt.title('Distribution of a Discrete Random Variable')
+plt.xlabel('Outcome')
+plt.ylabel('Frequency')
+plt.show()
+```
+
+Now lets calculate the Probability Mass Function of the Discrete Random Variable
+```{python}
+# Calculate and display the PMF
+pmf = Counter(data)
+total_outcomes = len(data)
+pmf = {outcome: count / total_outcomes for outcome, count in pmf.items()}
+
+outcomes, probabilities = zip(*sorted(pmf.items()))
+print("Discrete Random Variable PMF:")
+for outcome, probability in zip(outcomes, probabilities):
+    print(f"Outcome: {outcome}, Probability: {probability:.3f}")
+```
+
+   Understanding discrete random variables is foundational for building probabilistic models in machine learning. The ability to generate, visualize, and analyze the distribution of discrete random variables is essential for making informed decisions in various applications. Incorporating these concepts into your machine learning workflow will enhance your understanding of uncertainty and probability, key elements in data-driven decision-making.
 
 2. **Continuous Random Variables:**
-   - These can take any value within a given range. Examples include the height of a person or the temperature on a given day.
+   - Continuous random variables are essential in machine learning, often used to model phenomena with an infinite number of possible outcomes. These can take any value within a given range. Examples include the height of a person or the temperature on a given day.
+
+   First lets import the libraries, generate synthetic data for a continuous random variable and visualize the graph.
+```{python}
+# Import necessary libraries
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import norm
+
+# Generate synthetic data for a continuous random variable
+data = norm.rvs(loc=0, scale=1, size=1000, random_state=42)
+
+# Visualize the distribution of the continuous random variable
+plt.hist(data, bins=30, density=True, edgecolor='black', alpha=0.7)
+plt.title('Distribution of a Continuous Random Variable')
+plt.xlabel('Value')
+plt.ylabel('Probability Density')
+plt.show()
+```
+
+Now lets calculate and display the Probability Density Function:
+```{python}
+# Calculate and display the PDF
+xmin, xmax = plt.xlim()
+x = np.linspace(xmin, xmax, 100)
+pdf = norm.pdf(x, loc=np.mean(data), scale=np.std(data))
+plt.plot(x, pdf, 'k', linewidth=2)
+plt.title('Probability Density Function (PDF) of the Continuous Random Variable')
+plt.xlabel('Value')
+plt.ylabel('Probability Density')
+plt.show()
+```
+
+Continuous random variables are essential for modeling real-world phenomena in machine learning. Understanding their probability density functions and characteristics allows practitioners to make informed decisions when working with continuous data. Incorporating these concepts into your machine learning toolkit enhances your ability to analyze and model complex, continuous distributions.
 
 ### Machine Learning Applications:
 
