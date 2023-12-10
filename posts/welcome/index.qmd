@@ -1,12 +1,13 @@
 ---
-title: "Welcome To My Blog"
+title: "Learn, Adapt, Improve. Together."
 author: "Anant"
 date: "2023-11-25"
 categories: [news]
+image: "skull.gif"
 ---
 
-This is the first post in a Quarto blog. Welcome!
 
-![](thumbnail.jpg)
+Welcome to the blog where we'll gradually go in-depth in ML so that everyone has time to take in the information and absorb it without being overwhelmed.
 
-Since this post doesn't specify an explicit `image`, the first image in the post will be used in the listing page of posts.
+
+![Me when other articles put either way too much explanation or none at all in their posts](angry.gif){fig-align="center"}
